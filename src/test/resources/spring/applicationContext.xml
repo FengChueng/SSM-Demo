@@ -13,23 +13,21 @@
                http://www.springframework.org/schema/tx/spring-tx.xsd
                http://www.springframework.org/schema/aop
                http://www.springframework.org/schema/aop/spring-aop.xsd">
-    <!-- <context:property-placeholder location="classpath:/jdbc.properties"/> -->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
     
-    <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+<!--     <bean id="placeholderConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreResourceNotFound" value="true" />
         <property name="ignoreUnresolvablePlaceholders" value="true" />
         <property name="fileEncoding" value="UTF-8" />
         <property name="locations">
             <list>
-                <value>classpath:/jdbc.properties</value>
+                <value>classpath:jdbc.properties</value>
             </list>
         </property>
-    </bean>           
+    </bean>    -->        
     
-    <import resource="classpath*:spring/datasource.xml"/>               
+    <import resource="classpath:spring/datasource.xml"/>               
     
-    <!-- 注解管理事务 -->
-    <tx:annotation-driven/>
     <!-- 扫描指定包 -->
     <context:component-scan base-package="com.zyl.ssm">
          <!-- 不扫描注解为controller的类型 -->
@@ -75,8 +73,6 @@
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
-    
-    <tx:annotation-driven />
     
     <tx:annotation-driven transaction-manager="transactionManager" />
     
