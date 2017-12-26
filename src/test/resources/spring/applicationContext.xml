@@ -26,7 +26,7 @@
         </property>
     </bean>           
     
-    <import resource="classpath:spring/datasource.xml"/>               
+    <import resource="classpath*:spring/datasource.xml"/>               
     
     <!-- 注解管理事务 -->
     <tx:annotation-driven/>
