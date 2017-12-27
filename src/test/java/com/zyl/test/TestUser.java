@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.zyl.ssm.dao.UserMapper;
 import com.zyl.ssm.pojo.User;
+import com.zyl.ssm.service.inter.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring/applicationContext.xml")
@@ -15,6 +16,9 @@ public class TestUser {
     
     @Autowired
     private UserMapper userMapper;
+    
+    @Autowired
+    private UserService userService;
     
     
     @Test
@@ -25,12 +29,8 @@ public class TestUser {
     
     @Test
     public void testAddUser(){
-    	User user = new User();
-    	user.setUserName("zyl");
-    	user.setUserAge(22);
-    	
-        int userid = userMapper.addUser(user);
-        System.out.println(userid+"-" + user.getId());
+        User user = userService.addUser("zyl",22);
+        System.out.println(user.toString());
     }
     
 }
