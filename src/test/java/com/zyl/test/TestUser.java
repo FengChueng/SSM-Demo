@@ -30,7 +30,7 @@ public class TestUser {
     	user.setUserAge(22);
     	
         int userid = userMapper.addUser(user);
-        System.out.println(userid);
+        System.out.println(userid+"-" + user.getId());
     }
     
 }
