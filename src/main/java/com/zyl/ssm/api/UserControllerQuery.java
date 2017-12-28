@@ -16,38 +16,38 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("user")
-public class UserController {
+public class UserControllerQuery {
     @Autowired
     private UserService userService;
     
-    @ApiOperation(value = "添加用户", notes = "")
+//    @ApiOperation(value = "添加用户", notes = "")
+//    @ApiImplicitParams({
+//    	@ApiImplicitParam(name="userName",value="用户名",dataType="string",paramType="path"),
+//    	@ApiImplicitParam(name="userAge",value="年龄",dataType="integer",paramType="path")
+//    })
+//    @RequestMapping(value = "{userName}/{userAge}/addUser.json")
+//    public User addUserPath(@PathVariable(value="userName") String userName,@PathVariable(value="userAge")int userAge){
+////    	User user = userService.addUser(userName, userAge);
+//        User user = new User(1,"123",123);
+//        System.out.println("添加用户成功:"+user.toString());
+//        return user;
+//    }
+    
+    @ApiOperation(value = "添加用户 Post", notes = "")
     @ApiImplicitParams({
-    	@ApiImplicitParam(name="userName",value="用户名",dataType="string",paramType="path"),
-    	@ApiImplicitParam(name="userAge",value="年龄",dataType="integer",paramType="path")
+        @ApiImplicitParam(name="token",value="用户名",dataType="string",paramType="header"),
+        @ApiImplicitParam(name="userName",value="用户名",dataType="string",paramType="query"),
+        @ApiImplicitParam(name="userAge",value="年龄",dataType="integer",paramType="query")
     })
-    @RequestMapping(value = "{userName}/{userAge}/addUser.json")
-    public User addUserPath(@PathVariable(value="userName") String userName,@PathVariable(value="userAge")int userAge){
-//    	User user = userService.addUser(userName, userAge);
+    @RequestMapping(value = "/addUserQuery.json")
+    public User addUserQuery(@RequestParam(value="userName") String userName,@RequestParam(value="userAge")int userAge){
+//        User user = userService.addUser(userName, userAge);
+//        System.out.println("添加用户成功:"+user.toString());
         User user = new User(1,"123",123);
         System.out.println("添加用户成功:"+user.toString());
         return user;
     }
     
-//    @ApiOperation(value = "添加用户 Post", notes = "")
-//    @ApiImplicitParams({
-//        @ApiImplicitParam(name="token",value="用户名",dataType="string",paramType="header"),
-//        @ApiImplicitParam(name="userName",value="用户名",dataType="string",paramType="query"),
-//        @ApiImplicitParam(name="userAge",value="年龄",dataType="integer",paramType="query")
-//    })
-//    @RequestMapping(value = "/addUserQuery.json")
-//    public User addUserQuery(@RequestParam(value="userName") String userName,@RequestParam(value="userAge")int userAge){
-////        User user = userService.addUser(userName, userAge);
-////        System.out.println("添加用户成功:"+user.toString());
-//        User user = new User(1,"123",123);
-//        System.out.println("添加用户成功:"+user.toString());
-//        return user;
-//    }
-//    
 //    @ApiOperation(value = "添加用户 Post", notes = "")
 //    @ApiImplicitParam(name="user",value="用户名",dataType="user",paramType="body")
 //    @RequestMapping(value = "/addUserBody.json")
@@ -58,7 +58,6 @@ public class UserController {
 //        System.out.println("添加用户成功:"+user.toString());
 //        return user;
 //    }
-    
     
     
     

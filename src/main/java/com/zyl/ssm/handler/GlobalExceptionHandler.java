@@ -1,6 +1,5 @@
 package com.zyl.ssm.handler;
 
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -33,7 +32,7 @@ public class GlobalExceptionHandler {
      * @param throwable
      * @return
      */
-    @ExceptionHandler(CustomException.class)
+    @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public String exceptionHandler(NullPointerException exception){
         
