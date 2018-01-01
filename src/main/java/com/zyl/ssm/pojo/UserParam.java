@@ -2,7 +2,14 @@ package com.zyl.ssm.pojo;
 
 import java.io.Serializable;
 
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
+@Component
+@EnableAspectJAutoProxy
+@Scope(value="request",proxyMode=ScopedProxyMode.TARGET_CLASS)
 public class UserParam implements Serializable{
     /**
      * 

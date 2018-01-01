@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.zyl.ssm.exception.CustomException;
+import com.zyl.ssm.pojo.User;
 
 /**
  * 统一处理异常
@@ -21,10 +22,11 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(CustomException.class)
     @ResponseBody
-    public String exceptionHandler(CustomException exception){
+    public User exceptionHandler(CustomException exception){
         
         
-        return exception.getMessage();
+    	System.out.println("CustomException:"+exception.getMessage());
+    	return new User();
     }
     
     /**
@@ -34,10 +36,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
-    public String exceptionHandler(NullPointerException exception){
+    public User exceptionHandler(NullPointerException exception){
         
-        
-        return exception.getMessage();
+    	System.out.println("exceptionHandler:"+exception.getMessage());
+    	return new User();
     }
     
     /**
@@ -47,10 +49,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Throwable.class)
     @ResponseBody
-    public String exceptionHandler(Throwable throwable){
-        
-        
-        return throwable.getMessage();
+    public User exceptionHandler(Throwable throwable){
+        System.out.println("throwable:"+throwable.getMessage());
+        return new User(1,throwable.getMessage(),0);
     }
     
 }

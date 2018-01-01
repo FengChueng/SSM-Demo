@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zyl.ssm.pojo.User;
+import com.zyl.ssm.pojo.UserParam;
 import com.zyl.ssm.service.inter.UserService;
 
 import io.swagger.annotations.ApiImplicitParam;
@@ -19,6 +20,9 @@ import io.swagger.annotations.ApiOperation;
 public class UserControllerQuery {
     @Autowired
     private UserService userService;
+    
+    @Autowired
+    private UserParam userParam;
     
 //    @ApiOperation(value = "添加用户", notes = "")
 //    @ApiImplicitParams({
@@ -44,9 +48,27 @@ public class UserControllerQuery {
 //        User user = userService.addUser(userName, userAge);
 //        System.out.println("添加用户成功:"+user.toString());
         User user = new User(1,"123",123);
-        System.out.println("添加用户成功:"+user.toString());
+        System.out.println(userParam.toString()+"添加用户成功:"+user.toString());
         return user;
     }
+    
+    
+    @ApiOperation(value = "添加用户 Post", notes = "")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name="token",value="用户名",dataType="string",paramType="header"),
+        @ApiImplicitParam(name="userName",value="用户名",dataType="string",paramType="query"),
+        @ApiImplicitParam(name="userAge",value="年龄",dataType="integer",paramType="query")
+    })
+    @RequestMapping(value = "/addUserQuery2.json")
+    public User addUserQuery2(@RequestParam(value="userName") String userName,@RequestParam(value="userAge")int userAge) throws Exception{
+//        User user = userService.addUser(userName, userAge);
+//        System.out.println("添加用户成功:"+user.toString());
+        User user = new User(1,"123",123);
+        System.out.println(userService.toString());
+        System.out.println(userParam.toString()+"添加用户成功:"+user.toString());
+        throw new Exception("自定义异常");
+    }
+    
     
 //    @ApiOperation(value = "添加用户 Post", notes = "")
 //    @ApiImplicitParam(name="user",value="用户名",dataType="user",paramType="body")
