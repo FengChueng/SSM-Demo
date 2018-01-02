@@ -45,12 +45,12 @@
 			<bean class="com.zyl.ssm.interceptor.WebInterceptor1"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
-	<!-- <aop:aspectj-autoproxy proxy-target-class="true"/> -->
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
 	
 <!-- 	<bean name="userParam" class="com.zyl.ssm.pojo.UserParam" scope="request">  
 	    <aop:scoped-proxy/>  
 	</bean>   -->
 	
 	<!-- <bean name="userParam" class="com.zyl.ssm.pojo.UserParam" /> -->
-
+	
 </beans>

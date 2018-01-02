@@ -13,12 +13,14 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.zyl.ssm.pojo.User;
 
+@Order(1)
 @Component
 @Aspect
 public class LogInterceptor {
@@ -33,7 +35,7 @@ public class LogInterceptor {
 	public void logPointCut(){}
 	
 	@Before("logPointCut()")
-	public void doBefore(JoinPoint joinpoint){
+	public void doBefore(JoinPoint joinpoint) {
 		System.out.println("doBefore:"+Arrays.toString(joinpoint.getArgs()));
 	}
 	
@@ -48,6 +50,7 @@ public class LogInterceptor {
 			proceed = new User(1,"权限验证失败",0);
 		}
 		System.out.println("dorAround end");
+		
 		return proceed;
 	}
 	
@@ -60,7 +63,7 @@ public class LogInterceptor {
 	}
 	
 	@After("logPointCut()")
-	public void doAfter(JoinPoint joinpoint){
+	public void doAfter(JoinPoint joinpoint) {
 		System.out.println("doAfter");
 	}
 	

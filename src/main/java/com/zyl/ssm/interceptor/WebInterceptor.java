@@ -80,32 +80,32 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
 //        String remoteUser = request.getRemoteUser();//remoteUser:null
 //        System.out.println("remoteUser:"+remoteUser);
     	
-    	String protocol = request.getProtocol();
-    	System.out.println(protocol);
-    	
-        Enumeration<String> headerNames2 = request.getHeaderNames();
-        System.out.println("--------------headerNames  start--------------");
-        while (headerNames2.hasMoreElements()) {
-            System.out.println(headerNames2.nextElement()); 
-            
-        }
-        System.out.println("--------------headerNames  end--------------");
-        
-        Enumeration<String> parameterNames2 = request.getParameterNames();
-        System.out.println("--------------parameterNames  start--------------");
-        while (parameterNames2.hasMoreElements()) {
-            System.out.println(parameterNames2.nextElement()); 
-            
-        }
-        System.out.println("--------------parameterNames  end--------------");
-        
-        Enumeration<String> attributeNames = request.getAttributeNames();
-        System.out.println("--------------attributeName  start--------------");
-        while (attributeNames.hasMoreElements()) {
-            System.out.println(attributeNames.nextElement()); 
-            
-        }
-        System.out.println("--------------attributeName  end--------------");
+//    	String protocol = request.getProtocol();
+//    	System.out.println(protocol);
+//    	
+//        Enumeration<String> headerNames2 = request.getHeaderNames();
+//        System.out.println("--------------headerNames  start--------------");
+//        while (headerNames2.hasMoreElements()) {
+//            System.out.println(headerNames2.nextElement()); 
+//            
+//        }
+//        System.out.println("--------------headerNames  end--------------");
+//        
+//        Enumeration<String> parameterNames2 = request.getParameterNames();
+//        System.out.println("--------------parameterNames  start--------------");
+//        while (parameterNames2.hasMoreElements()) {
+//            System.out.println(parameterNames2.nextElement()); 
+//            
+//        }
+//        System.out.println("--------------parameterNames  end--------------");
+//        
+//        Enumeration<String> attributeNames = request.getAttributeNames();
+//        System.out.println("--------------attributeName  start--------------");
+//        while (attributeNames.hasMoreElements()) {
+//            System.out.println(attributeNames.nextElement()); 
+//            
+//        }
+//        System.out.println("--------------attributeName  end--------------");
         
         System.out.println("web interceptor preHandle");
         return super.preHandle(request, response, handler);
