@@ -1,5 +1,6 @@
 package com.zyl.ssm.api;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("user")
 public class UserControllerQuery {
+	private Logger LOGGER = Logger.getLogger(getClass());
     @Autowired
     private UserService userService;
     
@@ -48,7 +50,7 @@ public class UserControllerQuery {
 //        User user = userService.addUser(userName, userAge);
 //        System.out.println("添加用户成功:"+user.toString());
         User user = new User(1,"123",123);
-        System.out.println(userParam.toString()+"添加用户成功:"+user.toString());
+        LOGGER.info(userParam.toString()+" addUserQuery 添加用户成功:"+user.toString());
         return user;
     }
     
@@ -64,8 +66,7 @@ public class UserControllerQuery {
 //        User user = userService.addUser(userName, userAge);
 //        System.out.println("添加用户成功:"+user.toString());
         User user = new User(1,"123",123);
-        System.out.println(userService.toString());
-        System.out.println(userParam.toString()+"添加用户成功:"+user.toString());
+        LOGGER.info("userService.toString() "+userParam.toString()+" addUserQuery2 添加用户成功:"+user.toString());
         throw new Exception("自定义异常");
     }
     

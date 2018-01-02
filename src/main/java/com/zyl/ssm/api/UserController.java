@@ -1,5 +1,6 @@
 package com.zyl.ssm.api;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("user")
 public class UserController {
+	private Logger LOGGER = Logger.getLogger(getClass());
     @Autowired
     private UserService userService;
     
@@ -29,7 +31,7 @@ public class UserController {
     public User addUserPath(@PathVariable(value="userName") String userName,@PathVariable(value="userAge")int userAge){
 //    	User user = userService.addUser(userName, userAge);
         User user = new User(1,"123",123);
-        System.out.println("添加用户成功:"+user.toString());
+        LOGGER.info("添加用户成功:"+user.toString());
         return user;
     }
     

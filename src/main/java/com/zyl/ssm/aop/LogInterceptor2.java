@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -24,7 +25,7 @@ import com.zyl.ssm.pojo.User;
 @Component
 @Aspect
 public class LogInterceptor2 {
-
+	private Logger LOGGER = Logger.getLogger(getClass());
 	/**
 	 * 声明切入点
 	 */
@@ -36,20 +37,20 @@ public class LogInterceptor2 {
 	
 	@Before("logPointCut()")
 	public void doBefore(JoinPoint joinpoint){
-		System.out.println("doBefore2:"+Arrays.toString(joinpoint.getArgs()));
+		LOGGER.info("doBefore2:"+Arrays.toString(joinpoint.getArgs()));
 	}
 	
 	@Around("logPointCut()")
 	public Object doAround(ProceedingJoinPoint joinpoint) throws Throwable{
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		Object proceed;		
-		System.out.println("doAround2 start");
+		LOGGER.info("doAround2 start");
 		if(checkPermission(httpServletRequest)){
 			proceed = joinpoint.proceed();
 		}else{
 			proceed = new User(1,"权限验证失败",0);
 		}
-		System.out.println("dorAround2 end");
+		LOGGER.info("dorAround2 end");
 		return proceed;
 	}
 	
@@ -63,17 +64,17 @@ public class LogInterceptor2 {
 	
 	@After("logPointCut()")
 	public void doAfter(JoinPoint joinpoint){
-		System.out.println("doAfter2");
+		LOGGER.info("doAfter2");
 	}
 	
 	@AfterReturning(pointcut="logPointCut()",returning="retVal")
 	public void doAfterReturning(JoinPoint joinpoint,Object retVal){
-		System.out.println("doAfterReturning2 result:"+retVal);
+		LOGGER.info("doAfterReturning2 result:"+retVal);
 	}
 	
 	@AfterThrowing(pointcut="logPointCut()",throwing="throwable")
 	public void doAfterThrowing(JoinPoint joinPoint,Throwable throwable){
-		System.out.println("doAfterThrowing2"+ joinPoint.getSignature().toShortString() + "exception:"+throwable.getMessage());
+		LOGGER.warn("doAfterThrowing2"+ joinPoint.getSignature().toShortString() + "exception:"+throwable.getMessage());
 	}
 	
 }

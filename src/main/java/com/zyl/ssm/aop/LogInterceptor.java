@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -24,7 +25,7 @@ import com.zyl.ssm.pojo.User;
 @Component
 @Aspect
 public class LogInterceptor {
-
+	private Logger LOGGER = Logger.getLogger(getClass());
 	/**
 	 * 声明切入点
 	 */
@@ -36,20 +37,21 @@ public class LogInterceptor {
 	
 	@Before("logPointCut()")
 	public void doBefore(JoinPoint joinpoint) {
-		System.out.println("doBefore:"+Arrays.toString(joinpoint.getArgs()));
+		LOGGER.info("doBefore:"+Arrays.toString(joinpoint.getArgs()));
 	}
 	
 	@Around("logPointCut()")
 	public Object doAround(ProceedingJoinPoint joinpoint) throws Throwable{
 		HttpServletRequest httpServletRequest = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
 		Object proceed;		
-		System.out.println("doAround start");
+		LOGGER.info("doAround start");
 		if(checkPermission(httpServletRequest)){
 			proceed = joinpoint.proceed();
 		}else{
+			LOGGER.warn("权限验证失败");
 			proceed = new User(1,"权限验证失败",0);
 		}
-		System.out.println("dorAround end");
+		LOGGER.info("dorAround end");
 		
 		return proceed;
 	}
@@ -64,17 +66,17 @@ public class LogInterceptor {
 	
 	@After("logPointCut()")
 	public void doAfter(JoinPoint joinpoint) {
-		System.out.println("doAfter");
+		LOGGER.info("doAfter");
 	}
 	
 	@AfterReturning(pointcut="logPointCut()",returning="retVal")
 	public void doAfterReturning(JoinPoint joinpoint,Object retVal){
-		System.out.println("doAfterReturning result:"+retVal);
+		LOGGER.info("doAfterReturning result:"+retVal);
 	}
 	
 	@AfterThrowing(pointcut="logPointCut()",throwing="throwable")
 	public void doAfterThrowing(JoinPoint joinPoint,Throwable throwable){
-		System.out.println("doAfterThrowing"+ joinPoint.getSignature().toShortString() + "exception:"+throwable.getMessage());
+		LOGGER.error("doAfterThrowing"+ joinPoint.getSignature().toShortString() + "exception:"+throwable.getMessage(),throwable);
 	}
 	
 }

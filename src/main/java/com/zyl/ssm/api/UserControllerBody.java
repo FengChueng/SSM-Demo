@@ -1,5 +1,6 @@
 package com.zyl.ssm.api;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import io.swagger.annotations.ApiParam;
 @RestController
 @RequestMapping("user")
 public class UserControllerBody {
+	private Logger LOGGER = Logger.getLogger(getClass());
     @Autowired
     private UserService userService;
     
@@ -54,7 +56,7 @@ public class UserControllerBody {
 //        User newUser = userService.addUser(user.getUserName(), user.getUserAge());
 //        System.out.println("添加用户成功:"+newUser.toString());
         User user = new User(1,userParam.getUserName(),userParam.getUserAge());
-        System.out.println("添加用户成功:"+user.toString());
+        LOGGER.info("addUserBody 添加用户成功:"+user.toString());
         return user;
     }
     

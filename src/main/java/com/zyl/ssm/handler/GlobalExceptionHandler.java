@@ -1,5 +1,6 @@
 package com.zyl.ssm.handler;
 
+import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -14,7 +15,7 @@ import com.zyl.ssm.pojo.User;
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    
+	private Logger LOGGER = Logger.getLogger(getClass());
     /**
      * 处理自定义异常
      * @param throwable
@@ -23,9 +24,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public User exceptionHandler(CustomException exception){
-        
-        
-    	System.out.println("CustomException:"+exception.getMessage());
+    	LOGGER.error("CustomException:"+exception.getMessage(),exception);
     	return new User();
     }
     
@@ -38,7 +37,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public User exceptionHandler(NullPointerException exception){
         
-    	System.out.println("exceptionHandler:"+exception.getMessage());
+    	LOGGER.error("exceptionHandler:"+exception.getMessage(),exception);
     	return new User();
     }
     
@@ -50,7 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Throwable.class)
     @ResponseBody
     public User exceptionHandler(Throwable throwable){
-        System.out.println("throwable:"+throwable.getMessage());
+    	LOGGER.error("throwable:"+throwable.getMessage(),throwable);
         return new User(1,throwable.getMessage(),0);
     }
     
