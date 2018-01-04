@@ -126,6 +126,4 @@
 	<logger name="org.apache" level="debug" >
 		<appender-ref ref="thirdpart"/>
 	</logger>
-  
-  
 </configuration>
