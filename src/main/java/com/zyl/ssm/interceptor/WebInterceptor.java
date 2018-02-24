@@ -12,6 +12,7 @@ public class WebInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+    	response.addHeader("Access-Control-Allow-Origin", "*");//解决跨域
 //        ServletContext servletContext = request.getServletContext();
 //        String servletServerInfo = servletContext.getServerInfo();//servletServerInfo:Apache Tomcat/9.0.0.M17
 //        System.out.println("servleetServerInfo:"+servletServerInfo);

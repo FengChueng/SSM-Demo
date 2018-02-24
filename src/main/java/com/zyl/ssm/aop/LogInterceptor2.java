@@ -21,9 +21,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.zyl.ssm.pojo.User;
 
-@Order(2)
-@Component
-@Aspect
+//@Order(2)
+//@Component
+//@Aspect
 public class LogInterceptor2 {
 	private Logger LOGGER = Logger.getLogger(getClass());
 	/**
